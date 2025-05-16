@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 # Load environment variables from .env file
 load_dotenv()
 
+
 class Settings(BaseSettings):
     """Application settings."""
 
@@ -17,7 +18,10 @@ class Settings(BaseSettings):
     PROJECT_NAME: str = "Document Ingestion and RAG-based Q&A API"
 
     # Database
-    DATABASE_URL: str = os.getenv("DATABASE_URL", "postgresql+asyncpg://postgres:postgres@postgres-python:5432/jarvis_python")
+    DATABASE_URL: str = os.getenv(
+        "DATABASE_URL",
+        "postgresql+asyncpg://postgres:postgres@postgres-python:5432/jarvis_python",
+    )
     DB_ECHO: bool = os.getenv("DB_ECHO", "true").lower() == "true"
 
     # Security
@@ -33,7 +37,7 @@ class Settings(BaseSettings):
 
     # OpenAI (optional)
     OPENAI_API_KEY: Optional[str] = os.getenv("OPENAI_API_KEY")
-    OPENAI_MODEL: Optional[str] = os.getenv("OPENAI_MODEL", "text-embedding-ada-002")
+    OPENAI_MODEL: Optional[str] = os.getenv("OPENAI_MODEL", "gpt-3.5-turbo")
 
     # Document Processing
     CHUNK_SIZE: int = int(os.getenv("CHUNK_SIZE", "500"))
@@ -41,6 +45,7 @@ class Settings(BaseSettings):
 
     # RAG Settings
     TOP_K_DOCUMENTS: int = int(os.getenv("TOP_K_DOCUMENTS", "5"))
+
 
 # Create global settings object
 settings = Settings()

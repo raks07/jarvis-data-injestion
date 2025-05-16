@@ -29,6 +29,8 @@ class LLMService:
         self.pipe = None
         self.client = None
         self.use_openai = settings.OPENAI_API_KEY is not None
+        self.chat_model = "gpt-3.5-turbo"  # Default chat model
+        self.embedding_model = settings.OPENAI_MODEL  # For embeddings
 
         # Initialize OpenAI client if API key is available
         if self.use_openai:
@@ -93,6 +95,7 @@ class LLMService:
     async def _generate_with_openai(self, prompt: str) -> str:
         """Generate response using OpenAI API."""
         try:
+            # Use a chat model, not an embeddings model
             response = await self.client.chat.completions.create(
                 model=os.getenv("OPENAI_MODEL", "gpt-3.5-turbo"),
                 messages=[
