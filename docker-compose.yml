@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  # PostgreSQL Database with pgvector for Python Backend
+  postgres:
+    build:
+      context: ./db/postgres-pgvector
+      dockerfile: Dockerfile
+    container_name: jarvis-postgres-python
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: jarvis_python
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - python-network
+
+  # Python Backend
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: jarvis-python-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+    environment:
+      - ENVIRONMENT=development
+      - DATABASE_URL=postgresql+asyncpg://postgres:postgres@postgres:5432/jarvis_python
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-dummy_key}
+    volumes:
+      - .:/app
+    networks:
+      - python-network
+
+networks:
+  python-network:
+    driver: bridge
+
+volumes:
+  postgres-data:

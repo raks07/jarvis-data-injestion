@@ -63,11 +63,30 @@ alembic upgrade head
 
 ### Running the Application
 
+**Using Python directly:**
+
 ```bash
 uvicorn app.main:app --reload
 ```
 
 The API will be available at <http://localhost:8000>.
+
+**Using Docker:**
+
+```bash
+# Start both the Python backend and PostgreSQL with pgvector
+docker-compose up -d
+
+# Check logs
+docker-compose logs -f
+```
+
+This will start:
+
+- PostgreSQL with pgvector extension on port 5433
+- Python backend on port 8000
+
+The Docker setup includes a custom PostgreSQL image with pgvector extension, which is built from the Dockerfile in the `db/postgres-pgvector` directory.
 
 ## Project Structure
 
@@ -90,6 +109,10 @@ python-backend/
 │   │   ├── retrieval.py    # Vector retrieval
 │   │   └── llm.py          # Language model service
 │   └── main.py             # Application entry point
+├── db/                     # Database setup
+│   └── postgres-pgvector/  # PostgreSQL with pgvector
+│       ├── Dockerfile      # Custom PostgreSQL image with pgvector
+│       └── init-pgvector.sql # SQL to initialize pgvector extension
 ├── tests/                  # Test directory
 │   ├── conftest.py         # Test configuration
 │   └── ...                 # Test modules
@@ -97,6 +120,7 @@ python-backend/
 ├── alembic.ini             # Alembic configuration
 ├── requirements.txt        # Python dependencies
 ├── Dockerfile              # Docker configuration
+├── docker-compose.yml      # Local development setup with database
 └── .env.example            # Example environment variables
 ```
 
