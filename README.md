@@ -48,7 +48,14 @@ cp .env.example .env
 # Edit .env file with your settings
 ```
 
-4. Run database migrations:
+4. Generate a secure SECRET_KEY:
+
+```bash
+python3 -c "import secrets; print(secrets.token_hex(32))"
+# Copy the output and use it as your SECRET_KEY in .env file
+```
+
+5. Run database migrations:
 
 ```bash
 alembic upgrade head
@@ -60,7 +67,7 @@ alembic upgrade head
 uvicorn app.main:app --reload
 ```
 
-The API will be available at http://localhost:8000.
+The API will be available at <http://localhost:8000>.
 
 ## Project Structure
 
@@ -97,8 +104,8 @@ python-backend/
 
 Once the application is running, API documentation is available at:
 
-- Swagger UI: http://localhost:8000/docs
-- ReDoc: http://localhost:8000/redoc
+- Swagger UI: <http://localhost:8000/docs>
+- ReDoc: <http://localhost:8000/redoc>
 
 ## Development
 
