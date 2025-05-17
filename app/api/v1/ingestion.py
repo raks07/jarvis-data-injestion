@@ -37,3 +37,19 @@ async def get_ingestion_status(document_id: str, db: AsyncSession = Depends(get_
             detail=f"Ingestion for document {document_id} not found",
         )
     return result_status
+
+
+@router.delete("/{document_id}")
+async def cancel_ingestion(document_id: str, db: AsyncSession = Depends(get_db)):
+    """
+    Cancel an ongoing document ingestion process.
+    """
+    ingestion_service = IngestionService(db)
+    try:
+        await ingestion_service.cancel_ingestion(document_id)
+        return {"detail": f"Ingestion for document {document_id} cancelled"}
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Cannot cancel ingestion: {str(e)}",
+        )
