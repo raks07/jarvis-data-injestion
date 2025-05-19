@@ -126,10 +126,20 @@ python-backend/
 
 ## API Documentation
 
-Once the application is running, API documentation is available at:
+Once the application is running, comprehensive API documentation is available at:
 
-- Swagger UI: <http://localhost:8000/docs>
-- ReDoc: <http://localhost:8000/redoc>
+- Swagger UI: <http://localhost:8000/api/docs>
+- ReDoc: <http://localhost:8000/api/redoc>
+
+These interactive tools provide:
+
+1. Detailed descriptions of all endpoints
+2. Request and response schemas
+3. Interactive testing capabilities
+4. Code samples in multiple languages
+5. Model definitions and relationships
+
+For a static version of the API documentation, you can use the `generate_api_docs.sh` script in the jarvis-setup repository.
 
 ## Development
 
