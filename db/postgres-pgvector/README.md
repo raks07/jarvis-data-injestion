@@ -19,12 +19,12 @@ The Dockerfile:
 
 ## Usage
 
-This database is automatically started as part of the python-backend service. You don't need to start it separately.
+This database is automatically started as part of the jarvis-datastore service. You don't need to start it separately.
 
 If you need to modify the database setup, edit files in this directory and rebuild the containers:
 
 ```bash
-# From the python-backend directory
+# From the jarvis-datastore directory
 docker-compose down
 docker-compose build
 docker-compose up -d

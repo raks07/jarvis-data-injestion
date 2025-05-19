@@ -1,6 +1,6 @@
-# Python Backend for Document Ingestion and RAG-based Q&A
+# jarvis-datastore: Python Backend for Document Ingestion and RAG-based Q&A
 
-This component handles document ingestion, embedding generation, and Retrieval-Augmented Generation (RAG) based question answering.
+This component (GitHub repository: <https://github.com/raks07/jarvis-datastore>) handles document ingestion, embedding generation, and Retrieval-Augmented Generation (RAG) based question answering.
 
 ## Features
 
